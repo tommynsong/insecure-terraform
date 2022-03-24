@@ -1,0 +1,4 @@
+- repo: https://github.com/bridgecrewio/checkov.git
+  rev: 'master' # change to tag or sha
+  hooks:
+    - id: checkov
