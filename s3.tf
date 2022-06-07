@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "bucket" {
   # checkov:skip=BC_AWS_GENERAL_72: This is just a test bucket
-  bucket = "239780908821-some-random-bucket-name"
+  bucket        = "239780908821-some-rando-bucket-name"
+  force_destroy = true
   tags = {
     git_repo             = "insecure-terraform"
     yor_trace            = "8b49cbaf-bf71-4c47-be34-2a6b90d81cb2"
@@ -51,7 +52,7 @@ resource "aws_s3_bucket" "logs" {
   # checkov:skip=BC_AWS_GENERAL_72: ADD REASON
   # checkov:skip=BC_AWS_S3_16: ADD REASON
   # checkov:skip=BC_AWS_S3_14: ADD REASON
-  bucket        = "239780908821-tsong-test-bucket-log-bucket"
+  bucket        = "${aws_s3_bucket.bucket.id}-logs"
   force_destroy = true
   tags = {
     git_repo             = "insecure-terraform"
