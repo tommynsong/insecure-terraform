@@ -3,6 +3,8 @@ repos:
   rev: '2.0.1204' # change to tag or sha
   hooks:
     - id: checkov
+      verbose: true
+      args: [--soft-fail-on LOW]
 - repo: https://github.com/bridgecrewio/yor
   rev: 0.1.145
   hooks:
