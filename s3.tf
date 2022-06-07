@@ -1,46 +1,80 @@
-resource "aws_s3_bucket" "tsong-test-bucket" {
-  # checkov:skip=BC_AWS_NETWORKING_52: ADD REASON
-  # checkov:skip=BC_AWS_GENERAL_72: ADD REASON
-  # checkov:skip=BC_AWS_GENERAL_56: ADD REASON
+resource "aws_s3_bucket" "bucket" {
+  # checkov:skip=BC_AWS_GENERAL_72: This is just a test bucket
   bucket = "239780908821-some-random-bucket-name"
   tags = {
-    yor_trace = "8b49cbaf-bf71-4c47-be34-2a6b90d81cb2"
+    git_repo             = "insecure-terraform"
+    yor_trace            = "8b49cbaf-bf71-4c47-be34-2a6b90d81cb2"
+    git_commit           = "N/A"
+    git_file             = "s3.tf"
+    git_last_modified_at = "2022-06-07 21:26:27"
+    git_last_modified_by = "tommynsong@gmail.com"
+    git_modifiers        = "tommynsong"
+    git_org              = "tommynsong"
   }
 }
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
+  bucket = aws_s3_bucket.bucket.bucket
 
-resource "aws_s3_bucket" "tsong-test-bucket_log_bucket" {
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "aws:kms"
+    }
+  }
+}
+resource "aws_s3_bucket_logging" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+
+  target_bucket = aws_s3_bucket.logs.id
+  target_prefix = "log/"
+}
+resource "aws_s3_bucket_acl" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+  acl    = "private"
+}
+resource "aws_s3_bucket_public_access_block" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+resource "aws_s3_bucket_versioning" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+resource "aws_s3_bucket" "logs" {
   # checkov:skip=BC_AWS_GENERAL_56: ADD REASON
   # checkov:skip=BC_AWS_NETWORKING_52: ADD REASON
   # checkov:skip=BC_AWS_GENERAL_72: ADD REASON
   # checkov:skip=BC_AWS_S3_16: ADD REASON
   # checkov:skip=BC_AWS_S3_14: ADD REASON
   bucket = "239780908821-tsong-test-bucket-log-bucket"
-  tags = {
-    yor_trace = "f62a3dcc-c00b-4f73-8cba-80ca6f8d0969"
+  versioning {
+    enabled = true
   }
-}
-
-resource "aws_s3_bucket_logging" "tsong-test-bucket" {
-  bucket = aws_s3_bucket.tsong-test-bucket.id
-
-  target_bucket = aws_s3_bucket.tsong-test-bucket_log_bucket.id
-  target_prefix = "log/"
-}
-
-resource "aws_s3_bucket_versioning" "tsong-test-bucket" {
-  bucket = aws_s3_bucket.tsong-test-bucket.id
-
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-resource "aws_s3_bucket_server_side_encryption_configuration" "tsong-test-bucket" {
-  bucket = aws_s3_bucket.tsong-test-bucket.bucket
-
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "aws:kms"
+      }
     }
   }
+  force_destroy = true
+  tags = {
+    git_repo             = "insecure-terraform"
+    yor_trace            = "f62a3dcc-c00b-4f73-8cba-80ca6f8d0969"
+    git_commit           = "N/A"
+    git_file             = "s3.tf"
+    git_last_modified_at = "2022-06-07 21:26:27"
+    git_last_modified_by = "tommynsong@gmail.com"
+    git_modifiers        = "tommynsong"
+    git_org              = "tommynsong"
+  }
+}
+resource "aws_s3_bucket_acl" "logs" {
+  bucket = aws_s3_bucket.logs.id
+  acl    = "log-delivery-write"
 }
