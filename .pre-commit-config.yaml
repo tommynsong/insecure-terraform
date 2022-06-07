@@ -5,12 +5,16 @@ repos:
     - id: checkov
       verbose: true
       args: ['--soft-fail-on', 'LOW', '--quiet', '--compact']
-- repo: https://github.com/bridgecrewio/yor
-  rev: 0.1.145
-  hooks:
-    - id: yor
-      name: yor
-      args: ["."]
+# - repo: https://github.com/bridgecrewio/yor
+#   rev: 0.1.145
+#   hooks:
+#     - id: yor
+#       name: yor
+#       entry: yor tag -d
+#       args: ["."]
+#       language: golang
+#       types: [terraform]
+#       pass_filename: false
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.2.0
   hooks:
