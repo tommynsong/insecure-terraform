@@ -4,7 +4,7 @@ repos:
   hooks:
     - id: checkov
       verbose: true
-      args: ['--soft-fail-on', 'LOW']
+      args: ['--soft-fail-on', 'LOW', '--quiet', '--compact']
 - repo: https://github.com/bridgecrewio/yor
   rev: 0.1.145
   hooks:
