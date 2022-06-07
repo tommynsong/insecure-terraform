@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
-  bucket = aws_s3_bucket.bucket.bucket
+  bucket = aws_s3_bucket.bucket.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -51,17 +51,7 @@ resource "aws_s3_bucket" "logs" {
   # checkov:skip=BC_AWS_GENERAL_72: ADD REASON
   # checkov:skip=BC_AWS_S3_16: ADD REASON
   # checkov:skip=BC_AWS_S3_14: ADD REASON
-  bucket = "239780908821-tsong-test-bucket-log-bucket"
-  versioning {
-    enabled = true
-  }
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"
-      }
-    }
-  }
+  bucket        = "239780908821-tsong-test-bucket-log-bucket"
   force_destroy = true
   tags = {
     git_repo             = "insecure-terraform"
@@ -77,4 +67,19 @@ resource "aws_s3_bucket" "logs" {
 resource "aws_s3_bucket_acl" "logs" {
   bucket = aws_s3_bucket.logs.id
   acl    = "log-delivery-write"
+}
+resource "aws_s3_bucket_server_side_encryption_configuration" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "aws:kms"
+    }
+  }
+}
+resource "aws_s3_bucket_versioning" "logs" {
+  bucket = aws_s3_bucket.logs.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
