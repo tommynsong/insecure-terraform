@@ -32,5 +32,3 @@ repos:
   hooks:
     - id: terraform_fmt
       exclude: '.*/\.terragrunt-cache'
-    - id: terraform_validate
-      exclude: '.tfvars$'
