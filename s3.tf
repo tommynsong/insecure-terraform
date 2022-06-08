@@ -1,5 +1,4 @@
 resource "aws_s3_bucket" "bucket" {
-  # checkov:skip=BC_AWS_GENERAL_72: This is just a test bucket
   bucket        = "239780908821-some-rando-bucket-name"
   force_destroy = true
   tags = {
@@ -47,11 +46,6 @@ resource "aws_s3_bucket_versioning" "bucket" {
   }
 }
 resource "aws_s3_bucket" "logs" {
-  # checkov:skip=BC_AWS_GENERAL_56: ADD REASON
-  # checkov:skip=BC_AWS_NETWORKING_52: ADD REASON
-  # checkov:skip=BC_AWS_GENERAL_72: ADD REASON
-  # checkov:skip=BC_AWS_S3_16: ADD REASON
-  # checkov:skip=BC_AWS_S3_14: ADD REASON
   bucket        = "${aws_s3_bucket.bucket.id}-logs"
   force_destroy = true
   tags = {
