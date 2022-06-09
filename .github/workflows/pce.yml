@@ -1,4 +1,4 @@
-# This is a workflow to help you setup Bridgecrew in github code scanning 
+# This is a workflow to help you setup Bridgecrew in github code scanning
 
 name: Prisma Cloud Enterprise
 
@@ -19,9 +19,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Run Bridgecrew 
+      - name: Run Bridgecrew
         id: Bridgecrew
-        uses: bridgecrewio/bridgecrew-action@master 
+        uses: bridgecrewio/bridgecrew-action@master
         env:
           PRISMA_API_URL: ${{ secrets.PC_API_URL }}
         with:
