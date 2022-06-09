@@ -21,24 +21,24 @@ resource "aws_s3_bucket" "bucket" {
 #     }
 #   }
 # }
-resource "aws_s3_bucket_logging" "bucket" {
-  bucket = aws_s3_bucket.bucket.id
+# resource "aws_s3_bucket_logging" "bucket" {
+#   bucket = aws_s3_bucket.bucket.id
 
-  target_bucket = aws_s3_bucket.logs.id
-  target_prefix = "log/"
-}
-resource "aws_s3_bucket_acl" "bucket" {
-  bucket = aws_s3_bucket.bucket.id
-  acl    = "private"
-}
-resource "aws_s3_bucket_public_access_block" "bucket" {
-  bucket = aws_s3_bucket.bucket.id
+#   target_bucket = aws_s3_bucket.logs.id
+#   target_prefix = "log/"
+# }
+# resource "aws_s3_bucket_acl" "bucket" {
+#   bucket = aws_s3_bucket.bucket.id
+#   acl    = "private"
+# }
+# resource "aws_s3_bucket_public_access_block" "bucket" {
+#   bucket = aws_s3_bucket.bucket.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
+#   block_public_acls       = true
+#   block_public_policy     = true
+#   ignore_public_acls      = true
+#   restrict_public_buckets = true
+# }
 # resource "aws_s3_bucket_versioning" "bucket" {
 #   bucket = aws_s3_bucket.bucket.id
 #   versioning_configuration {
@@ -59,10 +59,10 @@ resource "aws_s3_bucket" "logs" {
     git_org              = "tommynsong"
   }
 }
-resource "aws_s3_bucket_acl" "logs" {
-  bucket = aws_s3_bucket.logs.id
-  acl    = "log-delivery-write"
-}
+# resource "aws_s3_bucket_acl" "logs" {
+#   bucket = aws_s3_bucket.logs.id
+#   acl    = "log-delivery-write"
+# }
 # resource "aws_s3_bucket_server_side_encryption_configuration" "logs" {
 #   bucket = aws_s3_bucket.logs.id
 
