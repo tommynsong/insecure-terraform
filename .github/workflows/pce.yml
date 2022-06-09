@@ -26,3 +26,4 @@ jobs:
           PRISMA_API_URL: ${{ secrets.PC_API_URL }}
         with:
           api-key: ${{ secrets.PC_API_KEY }}
+          soft_fail: true
