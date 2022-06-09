@@ -4,9 +4,9 @@ resource "aws_s3_bucket" "bucket" {
   tags = {
     git_repo             = "insecure-terraform"
     yor_trace            = "8b49cbaf-bf71-4c47-be34-2a6b90d81cb2"
-    git_commit           = "N/A"
+    git_commit           = "3e03623c43964383856e649cfe301197eaab8f9a"
     git_file             = "s3.tf"
-    git_last_modified_at = "2022-06-07 21:26:27"
+    git_last_modified_at = "2022-06-07 21:45:10"
     git_last_modified_by = "tommynsong@gmail.com"
     git_modifiers        = "tommynsong"
     git_org              = "tommynsong"
@@ -51,9 +51,9 @@ resource "aws_s3_bucket" "logs" {
   tags = {
     git_repo             = "insecure-terraform"
     yor_trace            = "f62a3dcc-c00b-4f73-8cba-80ca6f8d0969"
-    git_commit           = "N/A"
+    git_commit           = "3e03623c43964383856e649cfe301197eaab8f9a"
     git_file             = "s3.tf"
-    git_last_modified_at = "2022-06-07 21:26:27"
+    git_last_modified_at = "2022-06-07 21:45:10"
     git_last_modified_by = "tommynsong@gmail.com"
     git_modifiers        = "tommynsong"
     git_org              = "tommynsong"
