@@ -12,6 +12,18 @@ resource "aws_s3_bucket" "bucket" {
     git_org              = "tommynsong"
   }
 }
+
+resource "aws_s3_bucket" "bucket_log_bucket" {
+  bucket = "bucket-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+
+  target_bucket = aws_s3_bucket.bucket_log_bucket.id
+  target_prefix = "log/"
+}
+
 # resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
 #   bucket = aws_s3_bucket.bucket.id
 
@@ -59,6 +71,18 @@ resource "aws_s3_bucket" "logs" {
     git_org              = "tommynsong"
   }
 }
+
+resource "aws_s3_bucket" "logs_log_bucket" {
+  bucket = "logs-log-bucket"
+}
+
+resource "aws_s3_bucket_logging" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  target_bucket = aws_s3_bucket.logs_log_bucket.id
+  target_prefix = "log/"
+}
+
 # resource "aws_s3_bucket_acl" "logs" {
 #   bucket = aws_s3_bucket.logs.id
 #   acl    = "log-delivery-write"
