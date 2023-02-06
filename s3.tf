@@ -59,17 +59,17 @@ resource "aws_s3_bucket" "logs" {
     git_org              = "tommynsong"
   }
   grant {
-    type = "CanonicalUser"
+    type        = "CanonicalUser"
     permissions = ["FULL_CONTROL"]
-    id = "90525956fb4a6ce27f6ec8a2159a004f2f95e0c8a5ec0e9d2a7de676cba698cc"
+    id          = "90525956fb4a6ce27f6ec8a2159a004f2f95e0c8a5ec0e9d2a7de676cba698cc"
   }
   grant {
-    uri = "http://acs.amazonaws.com/groups/s3/LogDelivery"
-    type = "Group"
+    uri         = "http://acs.amazonaws.com/groups/s3/LogDelivery"
+    type        = "Group"
     permissions = ["READ_ACP", "WRITE"]
   }
-  server_side_encryption_configuration = {"rule": {"apply_server_side_encryption_by_default": {"sse_algorithm": "aws:kms"}}}
-  versioning = {"enabled": true}
+  server_side_encryption_configuration = { "rule" : { "apply_server_side_encryption_by_default" : { "sse_algorithm" : "aws:kms" } } }
+  versioning                           = { "enabled" : true }
 }
 
 # resource "aws_s3_bucket_acl" "logs" {
